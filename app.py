@@ -57,8 +57,31 @@ def plot_chart(symbol):
     return fig
 
 
-if compnay:
+if company:
 
     company_data  = get_symbol(company)
 
-    symbols  =  st.selectbox(company_data)
+    if company_data :
+        option =  st.selectbox(list(company_data.keys()))
+
+        selected_data  =  company_data.get(option)
+
+        st.success(f"Company name : {selected_data[0]}")
+        st.success(f'Company name : {selected_data[1]}')
+                   
+
+        submit  = st.button('plot' , type = 'primary')
+
+        if submit:
+            fig  = plot_chart(option)
+            st.plotly_chart(fig)
+
+    else:
+        st.error('the given compnat does not exists')
+        
+        
+        
+
+
+
+
